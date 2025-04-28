@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "email": "newuser@example.com",
+      "password": "$2a$10$xnUNjoexgB8jtwXRSxseHO776POabxbhdwO4a3d71tGPYQGyyksTm",
+      "nickname": "새로운유저",
+      "id": 1
+    }
+  ],
+  "cart": [],
+  "orders": []
+}

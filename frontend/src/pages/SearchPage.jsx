@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { searchBooks } from "../api/searchBooks.js";
 import SearchBar from "../components/SearchBar.jsx";
-import "../style/SearchPage.css"; // CSS 파일을 임포트
+import "../styles/SearchPage.css"; // CSS 파일을 임포트
 
 function SearchPage() {
   const [query, setQuery] = useState(""); // 검색어 상태

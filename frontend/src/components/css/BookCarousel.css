@@ -1,0 +1,58 @@
+.bookCarouselContainer {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 50px;
+    
+  }
+
+  .bookListWrapper {
+    display: flex;
+    overflow: hidden;
+  }
+  
+  
+  .bookCoverWrapper {
+    flex: 0 0 auto;
+    width: 150px; /* 각 책 표지의 너비 */
+    margin: 30px;
+    scroll-snap-align: start;
+    
+  }
+  
+  .bookCoverImage {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .bookTitle {
+    margin-top: 5px;
+    font-size: 0.9em;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  h3 { /* 추가적인 h3 스타일 (선택 사항) */
+    margin-bottom: 15px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .nextIcon{
+    border-radius: 25px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    height: 50px;
+    width: 50px;
+    margin-top: 100px;
+  }

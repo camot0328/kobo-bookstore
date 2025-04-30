@@ -12,6 +12,7 @@
     "start": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
+    "@tosspayments/tosspayments-sdk": "^2.3.4",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.5",
     "react": "^19.0.0",

@@ -10,7 +10,7 @@ function Home() {
   const handleSearch = async () => {
     try {
       const result = await searchBooks(query); // searchBooks 함수 사용
-      navigate("/search", { state: { books: result } }); // 검색 결과를 SearchPage로 전달하고 이동
+      navigate("/search", { state: { books: result, query } }); // 검색 결과와 검색어를 전달
     } catch (err) {
       console.error(err);
     }

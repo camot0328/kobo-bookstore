@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./css/BookCarousel.css";
+import "../styles/BookCarousel.css"; // CSS 파일을 import합니다.
 
-function BookCarousel({ query }) {
+function BookCarousel({ query, title }) {
   const [booksData, setBooksData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0); // ★ 추가: 현재 보여줄 책 인덱스
   const apiKey = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -56,35 +56,38 @@ function BookCarousel({ query }) {
   };
 
   return (
-    <div className="bookCarouselContainer">
-      <button
-        onClick={handlePrev}
-        disabled={currentIndex === 0}
-        className="nextIcon"
-      >
-        {"<"}
-      </button>
-
-      <div className="bookListWrapper">
-        {booksData.slice(currentIndex, currentIndex + 6).map((book, index) => (
-          <div key={index} className="bookCoverWrapper">
-            <img
-              src={book.imageUrl}
-              alt={book.title}
-              className="bookCoverImage"
-            />
-            <div className="bookTitle">{book.title}</div>
-          </div>
-        ))}
+    <div className="bookCarouselWrapper">
+      <h2 className="carouselTitle">{title}</h2>
+      <div className="bookCarouselContainer">
+        <button
+          onClick={handlePrev}
+          disabled={currentIndex === 0}
+          className="nextIcon"
+        >
+          {"<"}
+        </button>
+        <div className="bookListWrapper">
+          {booksData
+            .slice(currentIndex, currentIndex + 6)
+            .map((book, index) => (
+              <div key={index} className="bookCoverWrapper">
+                <img
+                  src={book.imageUrl}
+                  alt={book.title}
+                  className="bookCoverImage"
+                />
+                <div className="bookTitle">{book.title}</div>
+              </div>
+            ))}
+        </div>
+        <button
+          className="nextIcon"
+          onClick={handleNext}
+          disabled={currentIndex === booksData.length - 1}
+        >
+          {">"}
+        </button>
       </div>
-
-      <button
-        className="nextIcon"
-        onClick={handleNext}
-        disabled={currentIndex === booksData.length - 1}
-      >
-        {">"}
-      </button>
     </div>
   );
 }

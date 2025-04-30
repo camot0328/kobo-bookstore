@@ -7,7 +7,7 @@ export async function searchBooks(query) {
     const response = await kakao.get("/search/book", {
       params: {
         query: query,
-        size: 30,
+        size: 40,
       },
     });
 

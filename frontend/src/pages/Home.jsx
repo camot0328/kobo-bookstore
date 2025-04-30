@@ -26,18 +26,14 @@ function Home() {
         handleSearch={handleSearch}
       />
       {/* BookCarousel 컴포넌트 사용 */}
-      <br />
-      <h3>개발자가 찾는 추천도서</h3>
-      <BookCarousel query={"개발" + "엔드"} /> {/* 키워드 조합시 + 사용 */}
-      <br />
-      <h3>한강 작가 특별전!</h3>
-      <BookCarousel query={"한강" + "작가"} /> {/* 키워드 조합시 + 사용 */}
-      <br />
-      <h3>떠오르는 경제도서</h3>
-      <BookCarousel query={"세계" + "경제"} /> {/* 키워드 조합시 + 사용 */}
-      <br />
-      <h3>봄을 맞이하며, 시집 추천해요</h3>
-      <BookCarousel query={"시"} /> {/* 키워드 조합시 + 사용 */}
+      <BookCarousel title="개발자가 찾는 추천도서" query={"개발" + "엔드"} />{" "}
+      {/* 키워드 조합시 + 사용 */}
+      <BookCarousel title="한강 작가 특별전!" query={"한강" + "작가"} />{" "}
+      {/* 키워드 조합시 + 사용 */}
+      <BookCarousel title="가장 많이찾는 경제도서" query={"세계" + "경제"}/>{" "}
+      {/* 키워드 조합시 + 사용 */}
+      <BookCarousel title="봄을 맞이하며, 시집 추천해요" query={"시"} />{" "}
+      {/* 키워드 조합시 + 사용  */}
     </div>
   );
 }

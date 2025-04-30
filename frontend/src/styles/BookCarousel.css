@@ -1,16 +1,20 @@
 .bookCarouselContainer {
-    display: flex;
+  margin: 0px 0px 100px 0px;
+  justify-content: center;
+    display:flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 50px;
-    
   }
 
   .bookListWrapper {
     display: flex;
     overflow: hidden;
   }
-  
+
+  .carouselTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
   
   .bookCoverWrapper {
     flex: 0 0 auto;
@@ -55,4 +59,16 @@
     height: 50px;
     width: 50px;
     margin-top: 100px;
+  }
+
+  .bookCarouselWrapper {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .carouselTitle {
+    font-size: 2rem;
+    width: 1200px;      /* bookListWrapper와 동일한 width */
+    margin: auto;  /* 가운데 정렬 + 아래 여백 */
+    text-align: left;
   }

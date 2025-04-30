@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./css/BookCarousel.css";
+import "../styles/BookCarousel.css"; // CSS 파일을 import합니다.
 
 function BookCarousel({ query, title }) {
   const [booksData, setBooksData] = useState([]);

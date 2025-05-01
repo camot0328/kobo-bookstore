@@ -1,365 +1,131 @@
-.footer {
-  height: 500px;
-  position: relative;
-  width: 1920px;
-}
-
-.footerlogo {
-  background-image: url(../../assets/logo/kobo-logo.png);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  width: 200px;
-  height: 60px;
-  left: 132px;
-  position: absolute;
-  top: 150px;
-}
-
-.text-wrapper {
-  color: #ffffff;
-  font-family: "NanumGothic-ExtraBold", Helvetica;
-  font-size: 20px;
-  font-weight: 800;
-  height: 33px;
-  left: 44px;
-  letter-spacing: -2px;
-  line-height: 40px;
-  position: absolute;
-  text-align: center;
-  top: 12px;
-  white-space: nowrap;
-  width: 117px;
-}
-
-.div {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-color: #000000;
-  height: 90px;
-  position: absolute;
-  top: 0;
-  width: 1920px;
-}
-
-.frame {
-  height: 28px;
-  left: 127px;
-  position: absolute;
-  top: 28px;
-  width: 808px;
-}
-
-.text-wrapper-2 {
-  color: #000000;
-  font-family: "NanumGothic-ExtraBold", Helvetica;
-  font-size: 20px;
-  font-weight: 800;
-  height: 28px;
-  left: 0;
-  letter-spacing: -2px;
-  line-height: 40px;
-  position: absolute;
-  text-align: center;
-  top: -1px;
-  white-space: nowrap;
-  width: 79px;
-}
-
-.text-wrapper-3 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 20px;
-  font-weight: 400;
-  height: 28px;
-  left: 113px;
-  letter-spacing: -0.8px;
-  line-height: 40px;
-  position: absolute;
-  top: -1px;
-  white-space: nowrap;
-  width: 594px;
-}
-
-.text-wrapper-4 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 20px;
-  font-weight: 400;
-  height: 28px;
-  left: 700px;
-  letter-spacing: -0.6px;
-  line-height: 40px;
-  position: absolute;
-  top: -1px;
-  white-space: nowrap;
-  width: 75px;
-}
-
-.frame-2 {
-  height: 28px;
-  left: 995px;
-  position: absolute;
-  top: 28px;
-  width: 794px;
-}
-
-.text-wrapper-5 {
-  color: #000000;
-  font-family: "NanumGothic-ExtraBold", Helvetica;
-  font-size: 20px;
-  font-weight: 800;
-  height: 28px;
-  left: -8px;
-  letter-spacing: -2px;
-  line-height: 40px;
-  position: absolute;
-  text-align: center;
-  top: -1px;
-  white-space: nowrap;
-  width: 95px;
-}
-
-.p {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 20px;
-  font-weight: 400;
-  height: 28px;
-  left: 120px;
-  letter-spacing: -0.4px;
-  line-height: 40px;
-  position: absolute;
-  top: -1px;
-  white-space: nowrap;
-  width: 570px;
-}
-
-.text-wrapper-6 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 20px;
-  font-weight: 400;
-  height: 28px;
-  left: 690px;
-  letter-spacing: -0.6px;
-  line-height: 40px;
-  position: absolute;
-  top: -1px;
-  white-space: nowrap;
-  width: 75px;
-}
-
-.element {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  left: 136px;
-  letter-spacing: 0;
-  line-height: 34px;
-  position: absolute;
-  top: 295px;
-  width: 860px;
-}
-
-.text-wrapper-7 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 18px;
-  font-weight: 400;
-  height: 29px;
-  left: 136px;
-  letter-spacing: 0;
-  line-height: 34px;
-  position: absolute;
-  top: 235px;
-  white-space: nowrap;
-  width: 1012px;
-}
-
-.button {
-  all: unset;
-  background-color: #d9d9d97d;
+.footerOuter {
+  max-width: 1260px;   /* ★ 상단 책 전시 영역과 같은 폭 (너가 사용한 값으로 바꾸면 됨) */
+  margin: 0 auto;      /* 중앙 정렬 */
+  padding: 0 20px;     /* 좌우 여백 */
   box-sizing: border-box;
-  height: 28px;
-  left: 990px;
-  position: absolute;
-  top: 333px;
-  width: 122px;
+}
+/* ---------- topNotice: border는 무조건 화면 전체 ---------- */
+.topNoticeBorder {
+  height: 64px;
+  margin-left: -9999px;
+  margin-right: -9999px;
+
+  border-top: solid 1px #000000;
+  border-bottom: solid 1px #000000;
+}
+.topNoticeContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;                     /* ★ flex → grid로 변경 */
+  grid-template-columns: auto 1fr;   /* 첫 열: notice 크기만큼, 두 번째 열: 나머지 */
+  gap: 10px;
+  padding: 20px 0;
+  font-weight: bold;
+  align-items: center;               /* 세로 중앙 정렬 */
+}
+.notice {
+  justify-self: start; /* 왼쪽 정렬 */
+}
+.separator,
+.winner {
+  justify-self: start; /* separator와 winner도 왼쪽 정렬 (필요 시) */
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
-.button2 {
-  all: unset;
-  background-color: #d9d9d97d;
-  box-sizing: border-box;
-  height: 28px;
-  left: 1520px;
-  position: absolute;
-  top: 240px;
-  width: 122px;
-}
-
-.text-wrapper-8 {
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 좌/우 두 개 열 */
+  padding: 20px;
+  font-size: 14px;
   color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 28px;
-  left: 0;
-  letter-spacing: -0.16px;
-  line-height: 34px;
-  position: absolute;
-  text-align: center;
-  top: -10px;
-  white-space: nowrap;
-  width: 122px;
 }
 
-.frame-3 {
-  height: 60px;
-  left: 1320px;
-  position: absolute;
-  top: 146px;
-  width: 274px;
-}
-
-.text-wrapper-9 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 20px;
-  font-weight: 400;
-  height: 26px;
-  left: 10px;
-  letter-spacing: -0.2px;
-  line-height: 34px;
-  position: absolute;
-  text-align: center;
-  top: 15px;
-  white-space: nowrap;
-  width: 111px;
-}
-
-.text-wrapper-10 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 20px;
-  font-weight: 400;
-  height: 26px;
-  left: 219px;
-  letter-spacing: -0.2px;
-  line-height: 34px;
-  position: absolute;
-  text-align: center;
-  top: 15px;
-  white-space: nowrap;
-  width: 55px;
-}
-
-.ellipse {
-  background-image: url(../../assets/icon/youtube.png);
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #d9d9d9;
-  border-radius: 22.5px;
-  height: 45px;
-  left: 1609px;
-  opacity: 0.5;
-  position: absolute;
-  top: 152px;
-  width: 45px;
-}
-
-.ellipse-2 {
-  background-image: url(../../assets/icon/facebook.png);
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #d9d9d9;
-  border-radius: 22.5px;
-  height: 45px;
-  left: 1664px;
-  opacity: 0.5;
-  position: absolute;
-  top: 152px;
-  width: 45px;
-}
-
-.ellipse-3 {
-  background-image: url(../../assets/icon/instagram.png);
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #d9d9d9;
-  border-radius: 22.5px;
-  height: 45px;
-  left: 1719px;
-  opacity: 0.5;
-  position: absolute;
-  top: 152px;
-  width: 45px;
-}
-
-.text-wrapper-11 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 20px;
-  left: 1304px;
-  letter-spacing: -0.16px;
-  line-height: 34px;
-  position: absolute;
-  text-align: center;
-  top: 236px;
-  white-space: nowrap;
-  width: 217px;
-}
-
-.text-wrapper-12 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 16px;
-  font-weight: 400;
-  height: 44px;
-  left: 1304px;
-  letter-spacing: 0;
-  line-height: 24px;
-  position: absolute;
-  top: 273px;
-  width: 487px;
-}
-
-.element-2 {
-  color: #000000;
-  font-family: "NanumGothic-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  height: 63px;
-  left: 1531px;
-  letter-spacing: 0;
-  line-height: 24px;
-  position: absolute;
-  top: 353px;
-  width: 261px;
-}
-
-.info-certification {
-  background-image: url(../../assets/logo/info-certification-logo.png);
-  background-size: 25%;
-  background-repeat: no-repeat;
-  background-position: left;
-  background-position-x: 15px;
-  height: 60px;
-  left: 1300px;
-  position: absolute;
-  top: 360px;
-  width: 200px;
-  padding-left: 80px; /* 왼쪽 마진 대신 padding */
+/* ---------- 왼쪽 열 ---------- */
+.leftArea {
+  width: 810px;
+  justify-content: left;
+  padding: 20px 0px 0px 0px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  font-size: 14px;
+  gap: 10px;
+}
+
+.logoArea {
+  display: flex;           /* 이미지 위치 조정 가능 */
+  justify-content: flex-start;  /* 왼쪽 정렬 */
+  align-items: center;     /* 수직 중앙 정렬 (필요하면) */
+}
+
+.logoArea img {
+  width: 200px;  /* 원하는 크기로 조절 */
+  height: auto;
+}
+
+.companyLinks {
+  margin: 10px 0px 0px 0px;
+  display: flex;
+  justify-content: flex-start;
+  font-size: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.companyLinks span {
+  cursor: pointer;
+}
+
+.companyInfo {
   text-align: left;
-  line-height: 1.3;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* ---------- 오른쪽 열 ---------- */
+.rightArea {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.familyAndSNS {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.familySiteSelect {
+  padding: 5px;
+}
+
+.snsIcons span {
+  margin-left: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.purchaseSafety {
+  font-size: 14px;
+}
+
+.isms {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ---------- 반응형 ---------- */
+@media screen and (max-width: 768px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+  .topNotice {
+    flex-direction: column;
+    text-align: center;
+  }
+  .familyAndSNS {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .companyLinks {
+    justify-content: center;
+  }
 }

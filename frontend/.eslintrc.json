@@ -27,9 +27,5 @@
     "react": {
       "version": "detect"
     }
-  },
-  // unable to resolve path to module 에러 해결을 위한 코드
-  // ESLint에서 “경로를 못 찾겠다”는 오류(import/no-unresolved)를 끄는 설정
-  // 일시적으로는 괜찮으나, 사실 이렇게 하면 안 됨.. 임시방편..
-  "import/no-unresolved": "off"
+  }
 }

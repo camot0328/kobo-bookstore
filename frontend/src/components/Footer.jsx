@@ -1,4 +1,4 @@
-import "./css/Footer.css";
+import "../styles/Footer.css";
 import React from "react";
 
 function Footer() {
@@ -45,8 +45,8 @@ function Footer() {
 
       <button className="button2"> 서비스가입확인 </button>
 
-      <div className="frame-3">Family Site    ↓</div>
-      
+      <div className="frame-3">Family Site ↓</div>
+
       <div className="ellipse" />
 
       <div className="ellipse-2" />

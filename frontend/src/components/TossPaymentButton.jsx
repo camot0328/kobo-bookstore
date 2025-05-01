@@ -1,6 +1,12 @@
 import { loadTossPayments } from "@tosspayments/tosspayments-sdk";
 
-function TossPaymentButton({ amount, orderId, orderName, customerName }) {
+function TossPaymentButton({
+  amount,
+  orderId,
+  orderName,
+  customerName,
+  className,
+}) {
   const handlePayment = async () => {
     try {
       // 1. Toss SDK 로드
@@ -31,7 +37,11 @@ function TossPaymentButton({ amount, orderId, orderName, customerName }) {
     }
   };
 
-  return <button onClick={handlePayment}>결제하기</button>;
+  return (
+    <button onClick={handlePayment} className={className}>
+      결제하기
+    </button>
+  );
 }
 
 export default TossPaymentButton;

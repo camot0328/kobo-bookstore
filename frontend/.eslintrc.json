@@ -27,5 +27,7 @@
     "react": {
       "version": "detect"
     }
-  }
+  },
+  // unable to resolve path to module 에러 해결을 위한 코드.. 후
+  "import/no-unresolved": "off"
 }

@@ -1,44 +1,59 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { savePayment } from "../api/savePayment";
 
 export function SuccessPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [responseData, setResponseData] = useState(null);
+  const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
-    async function confirm() {
-      const requestData = {
-        orderId: searchParams.get("orderId"),
-        amount: searchParams.get("amount"),
-        paymentKey: searchParams.get("paymentKey"),
-      };
+    const user = JSON.parse(localStorage.getItem("user"));
+    const orderId = searchParams.get("orderId") || `ORDER_${Date.now()}`;
 
-      const response = await fetch("/api/confirm", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
+    if (localStorage.getItem(`order_saved_${orderId}`)) return;
+
+    const paymentData = {
+      paymentKey: searchParams.get("paymentKey") || "fake_payment_key_123",
+      orderId,
+      orderName: "도서 결제",
+      amount: Number(searchParams.get("amount")) || 10000,
+      currency: "KRW",
+      method: "카드",
+      status: "DONE",
+      approvedAt: new Date().toISOString(),
+      customerEmail: user?.email || "guest@example.com",
+      customerId: user?.id || null,
+    };
+
+    savePayment(paymentData)
+      .then((res) => {
+        setResponseData(res.data);
+        localStorage.setItem(`order_saved_${orderId}`, "true");
+      })
+      .catch((err) => {
+        setResponseData({
+          error: "결제 내역 저장 실패",
+          detail: err.message,
+        });
+        navigate("/fail");
       });
+  }, [searchParams, navigate]);
 
-      const json = await response.json();
-
-      if (!response.ok) {
-        throw { message: json.message, code: json.code };
-      }
-
-      return json;
+  // ✅ countdown 타이머 처리
+  useEffect(() => {
+    if (countdown <= 0) {
+      navigate("/");
+      return;
     }
 
-    confirm()
-      .then((data) => {
-        setResponseData(data);
-      })
-      .catch((error) => {
-        navigate(`/fail?code=${error.code}&message=${error.message}`);
-      });
-  }, [searchParams]);
+    const timer = setTimeout(() => {
+      setCountdown((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [countdown, navigate]);
 
   return (
     <>
@@ -46,56 +61,54 @@ export function SuccessPage() {
         <img
           width="100px"
           src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png"
+          alt="결제성공"
         />
         <h2>결제를 완료했어요</h2>
+        <p>{countdown}초 후 홈으로 이동합니다...</p>
+
         <div className="p-grid typography--p" style={{ marginTop: "50px" }}>
           <div className="p-grid-col text--left">
             <b>결제금액</b>
           </div>
-          <div className="p-grid-col text--right" id="amount">
-            {`${Number(searchParams.get("amount")).toLocaleString()}원`}
+          <div className="p-grid-col text--right">
+            {Number(searchParams.get("amount")).toLocaleString()}원
           </div>
         </div>
+
         <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
           <div className="p-grid-col text--left">
             <b>주문번호</b>
           </div>
-          <div className="p-grid-col text--right" id="orderId">
-            {`${searchParams.get("orderId")}`}
+          <div className="p-grid-col text--right">
+            {searchParams.get("orderId")}
           </div>
         </div>
+
         <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
           <div className="p-grid-col text--left">
             <b>paymentKey</b>
           </div>
           <div
             className="p-grid-col text--right"
-            id="paymentKey"
             style={{ whiteSpace: "initial", width: "250px" }}
           >
-            {`${searchParams.get("paymentKey")}`}
+            {searchParams.get("paymentKey")}
           </div>
         </div>
-        <div className="p-grid-col">
-          <Link to="https://docs.tosspayments.com/guides/v2/payment-widget/integration">
-            <button className="button p-grid-col5">연동 문서</button>
-          </Link>
-          <Link to="https://discord.gg/A4fRFXQhRu">
-            <button
-              className="button p-grid-col5"
-              style={{ backgroundColor: "#e8f3ff", color: "#1b64da" }}
-            >
-              실시간 문의
-            </button>
+
+        <div className="p-grid-col" style={{ marginTop: "20px" }}>
+          <Link to="/">
+            <button className="button p-grid-col5">홈으로 돌아가기</button>
           </Link>
         </div>
       </div>
+
       <div
         className="box_section"
-        style={{ width: "600px", textAlign: "left" }}
+        style={{ width: "600px", textAlign: "left", marginTop: "30px" }}
       >
-        <b>Response Data :</b>
-        <div id="response" style={{ whiteSpace: "initial" }}>
+        <b>저장된 주문 정보</b>
+        <div style={{ whiteSpace: "initial" }}>
           {responseData && <pre>{JSON.stringify(responseData, null, 4)}</pre>}
         </div>
       </div>

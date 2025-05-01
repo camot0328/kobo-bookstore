@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/BookCarousel.css"; // CSS 파일을 import합니다.
+import iconLeft from "../assets/icon/png/angle-left.png";
+import iconRight from "../assets/icon/png/angle-right.png";
 
 function BookCarousel({ query, title }) {
   const [booksData, setBooksData] = useState([]);
@@ -64,7 +66,7 @@ function BookCarousel({ query, title }) {
           disabled={currentIndex === 0}
           className="nextIcon"
         >
-          {"<"}
+          <img src={iconLeft} />
         </button>
         <div className="bookListWrapper">
           {booksData
@@ -83,9 +85,9 @@ function BookCarousel({ query, title }) {
         <button
           className="nextIcon"
           onClick={handleNext}
-          disabled={currentIndex === booksData.length - 1}
+          disabled={currentIndex === booksData.length - 6}
         >
-          {">"}
+          <img src={iconRight} />
         </button>
       </div>
     </div>

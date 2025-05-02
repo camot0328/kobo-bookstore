@@ -22,7 +22,7 @@ function Footer() {
         {/* ---------- 왼쪽 열 ---------- */}
         <div className="leftArea">
           <div className="logoArea">
-            {" "}
+
             <img src={koboLogo} alt="교보문고 로고" />
           </div>
 

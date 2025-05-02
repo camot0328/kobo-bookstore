@@ -7,13 +7,18 @@
 /* ---------- topNotice: border는 무조건 화면 전체 ---------- */
 .topNoticeBorder {
   height: 64px;
-  margin-left: -9999px;
-  margin-right: -9999px;
-
+  width: 100vw;  /* 화면 전체 */
   border-top: solid 1px #000000;
   border-bottom: solid 1px #000000;
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;  /* 안에 텍스트가 있다면 중앙 정렬 */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .topNoticeContent {
+  
   max-width: 1200px;
   margin: 0 auto;
   display: grid;                     /* ★ flex → grid로 변경 */
@@ -28,7 +33,7 @@
 }
 .separator,
 .winner {
-  justify-self: start; /* separator와 winner도 왼쪽 정렬 (필요 시) */
+  justify-self: center; /* separator와 winner도 왼쪽 정렬 (필요 시) */
   white-space: nowrap; /* 줄바꿈 방지 */
 }
 

@@ -93,7 +93,7 @@ function SearchPage() {
 
     // 가격 필터
     if (priceRange && priceRange !== "전체") {
-      const price = book.sale_price || book.price;
+      const price = book.price;
       if (priceRange === "~1만원" && price > 10000) match = false;
       if (priceRange === "1만원~5만원" && (price < 10000 || price > 50000))
         match = false;

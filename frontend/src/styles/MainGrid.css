@@ -1,0 +1,75 @@
+.mainGrid {
+    display: grid;
+    grid-template-areas:
+      "left right"
+      "bottom bottom";
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+    max-width: 1200px;
+    margin: 80px auto 120px auto;
+  }
+  
+  .leftBanner {
+    grid-area: left;
+    background-color: #f44336;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    height: 300px;
+  }
+  
+  .rightBanner {
+    grid-area: right;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .bottomRow {
+    grid-area: bottom;
+    display: grid;
+    grid-template-columns: 2fr 1fr;  /* 왼쪽: bottomMenu, 오른쪽: adBanner */
+    grid-gap: 20px;
+  }
+  
+  /* 아이콘 메뉴 */
+  .bottomMenu {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+  }
+
+  .menuItem {
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;    /* hover 전에도 pointer */
+    text-decoration: none; /* a 태그 밑줄 제거 */
+    color: inherit; /* 글자색 상속 (변하지 않음) */
+    flex-direction: column;
+  }
+  
+  .menuItem:hover {
+    cursor: pointer; /* hover 시에도 pointer 유지 */
+    color: inherit; /* hover 해도 글씨색 변하지 않음 */
+    text-decoration: none; /* 밑줄 안생김 */
+  }
+
+.menuText {
+  font-size: 14px;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-align: center;
+  color: inherit; /* 글자색 고정 */
+}
+
+  /* 광고 배너 */
+  .adBanner {
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+  }
+  

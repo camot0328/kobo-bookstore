@@ -1,9 +1,16 @@
-#root {
+/* #root {
   max-width: 1920px;
-  margin: auto;
+  margin: 0 auto;
   padding: 100px;
   text-align: center;
-  
+} */
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* ✅ 이게 핵심 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {

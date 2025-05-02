@@ -1,5 +1,6 @@
 {
   "/api/users*": "/users$1",
   "/api/cart*": "/cart$1",
-  "/api/orders*": "/orders$1"
+  "/api/orders*": "/orders$1",
+  "/api/books*": "/books%1"
 }

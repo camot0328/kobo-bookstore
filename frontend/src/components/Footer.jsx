@@ -22,7 +22,7 @@ function Footer() {
         {/* ---------- 왼쪽 열 ---------- */}
         <div className="leftArea">
           <div className="logoArea">
-            {" "}
+
             <img src={koboLogo} alt="교보문고 로고" />
           </div>
 
@@ -68,14 +68,12 @@ function Footer() {
               <span>🔴</span>
             </div>
           </div>
-
           <div className="purchaseSafety">
             토스페이먼츠 구매안전서비스
             <br />
             고객님은 안전거래를 위해 현금 등으로 결제 시 저희 쇼핑몰에서 가입한
             토스페이먼츠의 구매안전서비스를 이용하실 수 있습니다.
           </div>
-
           <div className="isms">
             정보보호관리체계 ISMS 인증획득
             <br />

@@ -11,12 +11,28 @@
   
   .leftBanner {
     grid-area: left;
-    background-color: #f44336;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    position: relative;
-    height: 300px;
+
+  /* ⭐ 배경색 슬라이드에 따라 변할거라 이건 JSX에서 컨트롤 할거임 */
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  height: 300px;
+  }
+  .leftBanner .slideButtons{
+    background-color: gray;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .leftBanner .slidesTitle{
+    font-size: 24px;
+  font-weight: bold;
+  margin-top: 50px; /* 위쪽 공간을 밀어내고 아래로 내려감 */
+  align-self: end;  /* grid 안에서 아래로 */
   }
   
   .rightBanner {
@@ -28,6 +44,7 @@
   }
   
   .bottomRow {
+    height: 100px;
     grid-area: bottom;
     display: grid;
     grid-template-columns: 2fr 1fr;  /* 왼쪽: bottomMenu, 오른쪽: adBanner */

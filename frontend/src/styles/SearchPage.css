@@ -8,23 +8,9 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 4fr; /* 검색 바와 콘텐츠 영역을 나눔 */
-  grid-template-rows: 160px auto 50px; /* 헤더와 콘텐츠 영역을 나눔 */
   grid-template-areas:
-    "header header"
-    "side results"
-    "footer footer";
+    "side results";
   gap: 20px;
-}
-
-/* 검색 바 (헤더) */
-.search-header {
-  margin-bottom: 20px;
-  grid-area: header;
-  justify-content: center; /* 가운데 정렬 */
-  align-items: center;
-  padding: 10px 0;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 검색 결과와 장르 선택을 나누는 영역 */

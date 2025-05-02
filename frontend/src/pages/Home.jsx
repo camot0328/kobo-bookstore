@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar.jsx";
 import { searchBooks } from "../api/searchBooks.js";
 import BookCarousel from "../components/BookCarousel.jsx";
 import MainGrid from "../components/maingrid/MainGrid.jsx";
+import TossPaymentButton from "../components/TossPaymentButton.jsx";
 
 function Home() {
   const [query, setQuery] = useState(""); // 검색어 상태
@@ -41,6 +42,13 @@ function Home() {
       <BookCarousel title="한강 작가 특별전" category="한강작가" />
       <BookCarousel title="개발자가 찾는 추천도서" category="개발" />
       <BookCarousel title="가장 많이 찾는 경제도서" category="세계경제" />
+      <br></br>
+      <TossPaymentButton
+        amount={1000}
+        orderName="테스트 도서 결제"
+        orderId={`ORDER_${Date.now()}`}
+        customerName="홍길동"
+      />
     </div>
   );
 }

@@ -31,7 +31,7 @@ function BookList({ books }) {
               <br />
               {book.publisher} / {book.datetime.slice(0, 10)}
               <br />
-              가격: {book.sale_price.toLocaleString()}원
+              가격: {book.price.toLocaleString()}원
             </p>
           </div>
 

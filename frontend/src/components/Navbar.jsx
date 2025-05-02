@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import { searchBooks } from "../api/searchBooks";
 
 function Navbar() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isCartHovered, setIsCartHovered] = useState(false);
   const [isCartActive, setIsCartActive] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -19,6 +21,23 @@ function Navbar() {
     setIsLoggedIn(false);
     alert("로그아웃 되었습니다.");
     navigate("/login");
+  };
+  const handleSearch = async () => {
+    if (query.trim()) {
+      try {
+        const books = await searchBooks(query); // 검색 API 호출
+        navigate("/search", { state: { query, books } }); // 검색 결과와 검색어 전달
+        setQuery("");
+      } catch (error) {
+        console.error("검색 실패:", error);
+        alert("검색 중 문제가 발생했습니다.");
+      }
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   const handleProfileClick = () => {
@@ -89,6 +108,9 @@ function Navbar() {
         <input
           type="text"
           placeholder="검색어 입력"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           style={{
             width: "300px",
             height: "30px",
@@ -99,6 +121,7 @@ function Navbar() {
           }}
         />
         <button
+          onClick={handleSearch}
           style={{
             height: "32px",
             padding: "0 12px",

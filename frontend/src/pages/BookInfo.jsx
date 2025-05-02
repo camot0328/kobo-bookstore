@@ -18,7 +18,6 @@ function BookInfo() {
         });
         if (res.data.documents.length > 0) {
           const bookData = res.data.documents[0];
-          bookData.price = bookData.price;
           setBook(bookData);
         }
       } catch (err) {

@@ -1,7 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import TossPaymentButton from "./TossPaymentButton";
+import { generateOrderId } from "../utils/generateOrderId";
+import { addCartItemToServer } from "../api/cartApi";
 
 function BookList({ books }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+  // 장바구니 핸들러 함수
+  const handleAddToCart = (book) => {
+    const cartItem = {
+      isbn: book.isbn,
+      title: book.title,
+      price: book.sale_price,
+      quantity: 1,
+      thumbnail: book.thumbnail,
+      addedAt: new Date().toISOString(),
+    };
+
+    if (user && token) {
+      // 회원 → 서버에 저장
+      addCartItemToServer({ ...cartItem, userId: user.id }, token)
+        .then(() => alert("장바구니에 담았습니다."))
+        .catch(() => alert("장바구니 저장 실패"));
+    } else {
+      // 비회원 → localStorage 저장
+      addCartItemToGuest(cartItem);
+      alert("비회원 장바구니에 담았습니다.");
+    }
+  };
+
   return (
     <div className="book-list">
       {books.map((book, index) => (
@@ -9,7 +37,7 @@ function BookList({ books }) {
           key={index}
           className="book-item d-flex align-items-center justify-content-between p-3 border rounded mb-3"
         >
-          {/* 왼쪽: 책 이미지 (클릭 시 상세로) */}
+          {/* 책 이미지 */}
           <Link to={`/bookinfo/${book.isbn}`}>
             <img
               src={book.thumbnail}
@@ -18,7 +46,7 @@ function BookList({ books }) {
             />
           </Link>
 
-          {/* 가운데: 책 정보 (제목 클릭 시 상세로) */}
+          {/* 책 정보 */}
           <div className="flex-grow-1 px-3">
             <Link
               to={`/bookinfo/${book.isbn}`}
@@ -35,10 +63,21 @@ function BookList({ books }) {
             </p>
           </div>
 
-          {/* 오른쪽: 버튼 (장바구니/바로구매) */}
+          {/* 버튼 영역 */}
           <div className="d-flex flex-column gap-2">
-            <button className="btn btn-outline-primary btn-sm">장바구니</button>
-            <button className="btn btn-primary btn-sm">바로구매</button>
+            <button
+              className="btn btn-outline-primary btn-sm"
+              onClick={() => handleAddToCart(book)}
+            >
+              장바구니
+            </button>
+            <TossPaymentButton
+              amount={book.sale_price}
+              orderId={generateOrderId(book.isbn)}
+              orderName={book.title}
+              customerName={user?.name || "비회원"}
+              className="btn btn-primary btn-sm"
+            />
           </div>
         </div>
       ))}

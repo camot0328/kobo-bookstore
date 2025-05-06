@@ -2,7 +2,8 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { searchBooks } from "../api/searchBooks.js";
 import SearchBar from "../components/SearchBar.jsx";
-import BookList from "../components/BookList.jsx";
+// import BookList from "../components/BookList.jsx";
+import BookListCopy from "../components/BookList copy.jsx";
 import "../styles/SearchPage.css";
 
 function SearchPage() {
@@ -224,7 +225,7 @@ function SearchPage() {
           {`"${searchedQuery}"에 대한 검색 결과입니다.`}
         </h5>
 
-        <BookList books={currentBooks} />
+        <BookListCopy books={currentBooks} />
 
         {/* 페이지네이션 */}
         <div className="pagination-container">

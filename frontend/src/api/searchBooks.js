@@ -17,3 +17,24 @@ export async function searchBooks(query) {
     throw error;
   }
 }
+
+export async function searchBooksPaged(query, page = 1, size = 20) {
+  try {
+    const response = await kakao.get("/search/book", {
+      params: {
+        query,
+        page,
+        size,
+      },
+    });
+
+    const data = response.data;
+    return {
+      books: data.documents,
+      total: data.meta.pageable_count,
+    };
+  } catch (error) {
+    console.error("페이지 기반 도서 검색 실패:", error);
+    return { books: [], total: 0 };
+  }
+}

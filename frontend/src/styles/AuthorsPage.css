@@ -1,0 +1,87 @@
+/* 전체 레이아웃 */
+.authors-page {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* 왼쪽 필터 영역 */
+.authors-sidebar {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.genre-title {
+  margin: 20px 0 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+}
+
+/* 라디오 버튼 스타일 */
+.filter-radio {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+
+.filter-radio:checked {
+  background-color: #5b4ffe;
+  border-color: #5b4ffe;
+}
+
+.filter-radio:checked::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.filter-label {
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* 오른쪽 결과 영역 */
+.authors-results {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.results-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}

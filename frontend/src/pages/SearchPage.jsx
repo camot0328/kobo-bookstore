@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar.jsx";
 import BookList from "../components/BookList.jsx";
+import Pagination from "../components/Pagination.jsx";
 import "../styles/SearchPage.css";
 
 function SearchPage() {
@@ -116,9 +116,6 @@ function SearchPage() {
 
   return (
     <div className="search-page">
-      {/* Navbar 추가 */}
-      <Navbar />
-
       {/* 검색결과 영역 */}
       <div className="search-content">
         {/* 왼쪽: 필터 영역 */}
@@ -202,30 +199,11 @@ function SearchPage() {
         <BookList books={currentBooks} />
 
         {/* 페이지네이션 */}
-        <div className="pagination-container">
-          <nav>
-            <ul className="pagination">
-              {Array.from(
-                { length: Math.ceil(filteredBooks.length / itemsPerPage) },
-                (_, index) => (
-                  <li
-                    key={index}
-                    className={`pagination-item ${
-                      currentPage === index + 1 ? "active" : ""
-                    }`}
-                  >
-                    <button
-                      className="pagination-link"
-                      onClick={() => setCurrentPage(index + 1)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                )
-              )}
-            </ul>
-          </nav>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(filteredBooks.length / itemsPerPage)}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );

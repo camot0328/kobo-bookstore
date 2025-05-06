@@ -8,6 +8,15 @@
       "birth": "1999-01-01",
       "address": "서울",
       "id": 1
+    },
+    {
+      "email": "mom@goo.com",
+      "password": "$2a$10$IDWKjt9drCWt9gRZy8W0S.VL1pZGorE1UFNMKFsGRuXSi43VeyhRS",
+      "name": "cs",
+      "phone": "01096699669",
+      "birth": "2025-05-02",
+      "address": "여기",
+      "id": 2
     }
   ],
   "cart": [],

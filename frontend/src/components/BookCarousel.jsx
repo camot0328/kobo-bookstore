@@ -5,6 +5,7 @@ import defaultThumbnail from "../assets/default-book-image.png";
 import { fetchBooks } from "../api/books";
 import iconLeft from "../assets/icon/png/angle-left.png";
 import iconRight from "../assets/icon/png/angle-right.png";
+import { Link } from "react-router-dom"; //Link 추가
 
 function BookCarousel({ category, title }) {
   const [booksData, setBooksData] = useState([]); // 배열로 선언
@@ -15,6 +16,7 @@ function BookCarousel({ category, title }) {
       const data = await fetchBooks(category);
       setBooksData(data);
       setCurrentIndex(0);
+      console.log(data);
     };
     loadBooks(); // 함수 호출
   }, [category]);
@@ -47,33 +49,40 @@ function BookCarousel({ category, title }) {
 
   return (
     <div className="bookCarouselWrapper">
-      <h2 className="carouselTitle">{title}</h2>
       <div className="bookCarouselContainer">
+        <h2 className="carouselTitle">{title}</h2>
+
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="nextIcon"
+          className="prevButton"
         >
           <img src={iconLeft} />
         </button>
+
         <div className="bookListWrapper">
-          {booksData
-            .slice(currentIndex, currentIndex + 6)
-            .map((book, index) => (
-              <div key={book.id || index} className="bookCoverWrapper">
+          {booksData.slice(currentIndex, currentIndex + 6).map((book) => (
+            <div key={book.isbn} className="bookCoverWrapper">
+              {/* ⭐ bookCoverWrapper 안에 Link 추가 */}
+              <Link
+                to={`/bookinfo/${book.isbn}`} // ⭐ isbn으로 이동
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 <img
                   src={book.thumbnail || defaultThumbnail}
                   alt={book.title}
                   className="bookCoverImage"
                 />
                 <div className="bookTitle">{book.title}</div>
-              </div>
-            ))}
+              </Link>
+            </div>
+          ))}
         </div>
+
         <button
           onClick={handleNext}
           disabled={currentIndex >= booksData.length - 6}
-          className="nextIcon"
+          className="nextButton"
         >
           <img src={iconRight} />
         </button>

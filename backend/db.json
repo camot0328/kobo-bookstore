@@ -19,6 +19,18 @@
       "id": 2
     },
     {
+      "email": "kosta123@naver.com",
+      "password": "$2a$10$Z8dMmTuRhH4mTictJu8iEO8U7.bgoYYywtGZiVd5f8o8PxtC.kP2m",
+      "name": "코쟁이",
+      "phone": "01011112222",
+      "birth": "1111-11-11",
+      "address": "알빠인가요 개인정보 입니다 ",
+      "id": 3
+    }
+  ],
+  "cart": [],
+  "orders": [
+    {
       "email": "bbb@naver.com",
       "password": "$2a$10$845.ziAx9u0Gp86AFxMEbOxBVA2pZoBpLBkaxG6UmLF7xhAtBfMz6",
       "name": "홍길동",

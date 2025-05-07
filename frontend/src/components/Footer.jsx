@@ -4,84 +4,58 @@ import koboLogo from "../assets/logo/kobo-logo.png";
 
 function Footer() {
   return (
-    <footer className="footerOuter">
-      {/* 1. 경계선이 전체 폭으로 나올 topNotice 래퍼 */}
-      <div className="topNoticeBorder">
-        <div className="topNoticeContent">
-          <span className="notice">
-            공지사항 | 기프트카드 이용약관 변경 안내(3/28)
-          </span>
-          <span className="separator">|</span>
-          <span className="winner">
-            당첨자발표 | [입반단독] 클로즈의 후쿠오카 이벤트
-          </span>
+    <footer className="footer-kobo">
+      {/* 상단 공지 바 */}
+      <div className="footer-notice-bar">
+        <div className="notice-left">
+          <strong>공지사항</strong>
+          <span>기프트카드 이용약관 변경 안내 (3/28)</span>
+        </div>
+        <div className="notice-right">
+          <strong>당첨자발표</strong>
+          <span>나는 부활이요 생명이니 당첨자 발표</span>
         </div>
       </div>
 
-      <div className="footerGrid">
-        {/* ---------- 왼쪽 열 ---------- */}
-        <div className="leftArea">
-          <div className="logoArea">
-
-            <img src={koboLogo} alt="교보문고 로고" />
-          </div>
-
-          <div className="companyLinks">
-            <span>회사소개</span>
-            <p>|</p>
-            <span>이용약관</span>
-            <p>|</p>
-            <span>개인정보처리방침</span>
-            <p>|</p>
-            <span>청소년보호정책</span>
-            <p>|</p>
-            <span>대량주문안내</span>
-            <p>|</p>
-            <span>협력사</span>
-            <p>|</p>
-            <span>채용정보</span>
-            <p>|</p>
-            <span>광고소개</span>
-          </div>
-
-          <div className="companyInfo">
-            대표이사 : 허정도 | 서울특별시 종로구 종로1 | 사업자등록번호 :
-            102-81-11670
-            <br />
-            대표전화 : 1544-1900 | FAX : 0502-987-5711 | 통신판매업신고번호 : 제
-            653호
-          </div>
+      {/* 본문 푸터 */}
+      <div className="footer-main">
+        {/* 왼쪽: 로고 */}
+        <div className="footer-logo-section">
+          <img src={koboLogo} alt="코보문고 로고" className="footer-logo" />
         </div>
 
-        {/* ---------- 오른쪽 열 ---------- */}
-        <div className="rightArea">
-          <div className="familyAndSNS">
-            <select className="familySiteSelect">
-              <option>Family Site</option>
-              <option>교보문고</option>
-              <option>핫트랙스</option>
-              <option>sam</option>
-            </select>
-            <div className="snsIcons">
-              <span>🔵</span>
-              <span>🟢</span>
-              <span>🔴</span>
-            </div>
-          </div>
-          <div className="purchaseSafety">
-            토스페이먼츠 구매안전서비스
-            <br />
-            고객님은 안전거래를 위해 현금 등으로 결제 시 저희 쇼핑몰에서 가입한
-            토스페이먼츠의 구매안전서비스를 이용하실 수 있습니다.
-          </div>
-          <div className="isms">
-            정보보호관리체계 ISMS 인증획득
-            <br />
-            [인증범위] 인터넷 교보문고 및 브랜드 서비스 운영
-            <br />
-            [유효기간] 2023.11.15 ~ 2026.11.14
+        {/* 중앙: 링크 */}
+        <ul className="footer-link-list">
+          <li><a href="#">회사소개</a></li>
+          <li><a href="#">이용약관</a></li>
+          <li><a href="#"><strong>개인정보처리방침</strong></a></li>
+          <li><a href="#">청소년보호정책</a></li>
+          <li><a href="#">대량주문안내</a></li>
+          <li><a href="#">협력사</a></li>
+          <li><a href="#">채용정보</a></li>
+          <li><a href="#">광고소개</a></li>
+        </ul>
+
+        {/* 오른쪽: 소셜/패밀리사이트 */}
+        <div className="footer-right-section">
+          <select className="footer-family-select">
+            <option>Family Site</option>
+            <option>교보문고</option>
+            <option>핫트랙스</option>
+          </select>
+          <div className="footer-social-icons">
+            <a href="#"><i className="fab fa-facebook-f"></i></a>
+            <a href="#"><i className="fab fa-instagram"></i></a>
+            <a href="#"><i className="fab fa-youtube"></i></a>
           </div>
         </div>
+      </div>
+
+      {/* 하단 정보 */}
+      <div className="footer-bottom-info">
+        <p>대표이사 : 허정도 | 서울특별시 종로구 종로1 | 사업자등록번호 : 102-81-11670</p>
+        <p>대표전화 : 1544-1900 | FAX : 0502-987-5711 | 통신판매업신고번호 : 제653호</p>
+        <p>© KOBO BOOKSTORE. All rights reserved.</p>
       </div>
     </footer>
   );

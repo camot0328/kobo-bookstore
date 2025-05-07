@@ -18,21 +18,18 @@ function RecommendPage() {
     setBooks([]);
 
     try {
-      // 1초 딜레이 추가!
-      await new Promise((res) => setTimeout(res, 1000));
-
-      // 1. GPT로 책 제목 추천
       const recommended = await getRecommendedBooks(userInput);
-      console.log("GPT 추천 결과:", recommended);
 
-      // 2. Kakao API로 각 책 정보 가져오기
-      const results = [];
-      for (const { title } of recommended) {
-        const result = await searchBooks(title);
-        if (result.length > 0) results.push(result[0]); // 가장 관련 높은 책만 사용
-      }
+      const searchResults = await Promise.all(
+        recommended.map(async (book) => {
+          const results = await searchBooks(book.title);
+          if (results.length > 0) return results[0];
+          return null;
+        })
+      );
 
-      setBooks(results);
+      const filtered = searchResults.filter(Boolean).slice(0, 3);
+      setBooks(filtered);
     } catch (err) {
       console.error("추천 실패:", err);
       setError("추천 도서를 불러오는 중 문제가 발생했어요.");

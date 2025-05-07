@@ -118,7 +118,7 @@
 }
 
 /* ---------- 반응형 ---------- */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .footerGrid {
     grid-template-columns: 1fr;
   }
@@ -133,4 +133,4 @@
   .companyLinks {
     justify-content: center;
   }
-}
+}*/

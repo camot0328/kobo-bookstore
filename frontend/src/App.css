@@ -8,7 +8,7 @@
   margin: 0;
   padding: 0;
   height: 100vh; /* ✅ 이게 핵심 */
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
 }

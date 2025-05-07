@@ -164,18 +164,13 @@ function Navbar() {
               </Link>
             </li>
             <li className="navbar__category-item">
-              <Link to="/domestic" className="navbar__category-link">
-                국내도서
-              </Link>
-            </li>
-            <li className="navbar__category-item">
-              <Link to="/foreign" className="navbar__category-link">
-                해외도서
-              </Link>
-            </li>
-            <li className="navbar__category-item">
               <Link to="/authors" className="navbar__category-link">
                 작가별도서
+              </Link>
+            </li>
+            <li className="navbar__category-item">
+              <Link to="/recommend" className="navbar__category-link">
+                추천도서
               </Link>
             </li>
           </ul>
@@ -191,18 +186,13 @@ function Navbar() {
               </Link>
             </li>
             <li className="navbar__dropdown-item">
-              <Link to="/domestic" className="navbar__dropdown-link">
-                국내도서
-              </Link>
-            </li>
-            <li className="navbar__dropdown-item">
-              <Link to="/foreign" className="navbar__dropdown-link">
-                해외도서
-              </Link>
-            </li>
-            <li className="navbar__dropdown-item">
               <Link to="/authors" className="navbar__dropdown-link">
                 작가별도서
+              </Link>
+            </li>
+            <li className="navbar__dropdown-item">
+              <Link to="/recommend" className="navbar__dropdown-link">
+                추천도서
               </Link>
             </li>
           </ul>

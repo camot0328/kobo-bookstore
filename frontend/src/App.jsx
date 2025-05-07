@@ -14,7 +14,7 @@ import Register from "./pages/Register.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 import BookInfo from "./pages/BookInfo.jsx";
 import SuccessPage from "./pages/Success.jsx";
-import OrderListPage from "./pages/Order.jsx";
+// import OrderListPage from "./pages/Order.jsx";
 import Mypage from "./pages/MyPage.jsx";
 import ProfileManage from "./pages/ProfileManage.jsx";
 import AuthorsPage from "./pages/AuthorsPage.jsx";
@@ -43,7 +43,7 @@ function AppWithLayout() {
           <Route path="/bookinfo/:isbn" element={<BookInfo />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/fail" element={<SuccessPage />} />
-          <Route path="/orders" element={<OrderListPage />} />
+          {/* <Route path="/orders" element={<OrderListPage />} /> */}
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/profileManage" element={<ProfileManage />} />
         </Routes>

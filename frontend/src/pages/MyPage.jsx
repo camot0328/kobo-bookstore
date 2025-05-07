@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import WingBanner from "../components/WingBanner";
 import ProfileManage from "./ProfileManage";
-// ✅ 회원정보 컴포넌트 import
+import CartList from "./CartList";
+import OrderHistory from "./OrderHistory";
 
+// ✅ 회원정보 컴포넌트 import
 function Mypage() {
   const [user, setUser] = useState(null);
   const [activeTab, setActiveTab] = useState("order");
@@ -133,8 +135,8 @@ function Mypage() {
             color: "#333",
           }}
         >
-          {activeTab === "order" && <p>주문내역 준비 중입니다.</p>}
-          {activeTab === "cart" && <p>장바구니 준비 중입니다.</p>}
+          {activeTab === "order" && <OrderHistory />}
+          {activeTab === "cart" && <CartList />}
           {activeTab === "wishlist" && <p>찜 목록 준비 중입니다.</p>}
           {activeTab === "profile" && <ProfileManage />}
         </div>

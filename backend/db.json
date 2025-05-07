@@ -29,21 +29,8 @@
     }
   ],
   "cart": [],
-  "orders": [
-    {
-      "paymentKey": "tviva20250502133114Lqml9",
-      "orderId": "ORDER_1746160215515",
-      "orderName": "도서 결제",
-      "amount": 1000,
-      "currency": "KRW",
-      "method": "카드",
-      "status": "DONE",
-      "approvedAt": "2025-05-02T04:31:42.024Z",
-      "customerEmail": "guest@example.com",
-      "customerId": null,
-      "id": 1
-    }
-  ],
+  "orders": [],
+  "payments": [],
   "books": [
     {
       "authors": [

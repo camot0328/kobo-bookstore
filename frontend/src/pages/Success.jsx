@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { savePayment } from "../api/savePayment";
+import { saveOrder } from "../api/saveOrder";
+import { clearCartByUserId } from "../api/cartApi";
 
 export function SuccessPage() {
   const navigate = useNavigate();
@@ -10,9 +12,19 @@ export function SuccessPage() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("accessToken");
     const orderId = searchParams.get("orderId") || `ORDER_${Date.now()}`;
 
-    if (localStorage.getItem(`order_saved_${orderId}`)) return;
+    if (!user || !token) {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+      return;
+    }
+
+    if (localStorage.getItem(`order_saved_${orderId}`)) {
+      console.log("⚠️ 이미 저장된 주문입니다.");
+      return;
+    }
 
     const paymentData = {
       paymentKey: searchParams.get("paymentKey") || "fake_payment_key_123",
@@ -27,92 +39,156 @@ export function SuccessPage() {
       customerId: user?.id || null,
     };
 
+    let savedItems = [];
+    try {
+      const raw = localStorage.getItem("order_items");
+      console.log("📦 SuccessPage에서 읽은 raw order_items:", raw);
+
+      if (!raw) {
+        throw new Error("order_items가 없습니다");
+      }
+
+      savedItems = JSON.parse(raw);
+      console.log("📦 파싱된 order_items:", savedItems);
+
+      if (!Array.isArray(savedItems) || savedItems.length === 0) {
+        throw new Error("order_items가 배열이 아니거나 비어 있음");
+      }
+    } catch (err) {
+      console.error("❌ order_items 파싱 실패:", err);
+      alert("주문 상품 정보를 불러올 수 없습니다.");
+      navigate("/");
+      return;
+    }
+
+    // 주문 데이터 구성 시 각 필드 확인
+    const orderData = {
+      orderId,
+      userId: user.id,
+      items: savedItems.map((item) => ({
+        isbn: item.isbn || "",
+        title: item.title || "제목 없음",
+        price: Number(item.price) || 0,
+        quantity: Number(item.quantity) || 1,
+        thumbnail: item.thumbnail || "",
+      })),
+      amount: paymentData.amount,
+      createdAt: new Date().toISOString(),
+      status: "결제완료",
+    };
+
+    console.log("✅ 저장할 주문 데이터:", orderData);
+
     savePayment(paymentData)
       .then((res) => {
+        console.log("💰 결제 정보 저장 성공:", res.data);
         setResponseData(res.data);
+        return saveOrder(orderData);
+      })
+      .then((orderRes) => {
+        console.log("📦 주문 정보 저장 성공:", orderRes);
         localStorage.setItem(`order_saved_${orderId}`, "true");
+
+        // 장바구니 비우기 전에 확인
+        console.log("🧹 장바구니 비우기 시작 - userId:", user.id);
+        return clearCartByUserId(user.id);
+      })
+      .then((clearRes) => {
+        console.log("🧹 장바구니 비우기 성공:", clearRes);
+        localStorage.removeItem("order_items");
+        alert("결제가 완료되었습니다.");
+        navigate("/mypage");
       })
       .catch((err) => {
+        console.error("❌ 결제 또는 주문 처리 실패:", err);
         setResponseData({
-          error: "결제 내역 저장 실패",
+          error: "처리 실패",
           detail: err.message,
         });
         navigate("/fail");
       });
   }, [searchParams, navigate]);
 
-  // ✅ countdown 타이머 처리
-  useEffect(() => {
-    if (countdown <= 0) {
-      navigate("/");
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setCountdown((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [countdown, navigate]);
-
   return (
-    <>
-      <div className="box_section" style={{ width: "600px" }}>
-        <img
-          width="100px"
-          src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png"
-          alt="결제성공"
-        />
-        <h2>결제를 완료했어요</h2>
-        <p>{countdown}초 후 홈으로 이동합니다...</p>
-
-        <div className="p-grid typography--p" style={{ marginTop: "50px" }}>
-          <div className="p-grid-col text--left">
-            <b>결제금액</b>
-          </div>
-          <div className="p-grid-col text--right">
-            {Number(searchParams.get("amount")).toLocaleString()}원
-          </div>
-        </div>
-
-        <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
-          <div className="p-grid-col text--left">
-            <b>주문번호</b>
-          </div>
-          <div className="p-grid-col text--right">
-            {searchParams.get("orderId")}
-          </div>
-        </div>
-
-        <div className="p-grid typography--p" style={{ marginTop: "10px" }}>
-          <div className="p-grid-col text--left">
-            <b>paymentKey</b>
-          </div>
-          <div
-            className="p-grid-col text--right"
-            style={{ whiteSpace: "initial", width: "250px" }}
-          >
-            {searchParams.get("paymentKey")}
-          </div>
-        </div>
-
-        <div className="p-grid-col" style={{ marginTop: "20px" }}>
-          <Link to="/">
-            <button className="button p-grid-col5">홈으로 돌아가기</button>
-          </Link>
-        </div>
-      </div>
+    <div
+      className="success-container"
+      style={{
+        maxWidth: "600px",
+        margin: "60px auto",
+        padding: "40px",
+        borderRadius: "16px",
+        backgroundColor: "#f0f4f8",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        textAlign: "center",
+      }}
+    >
+      <img
+        width="80"
+        src="https://static.toss.im/illusts/check-blue-spot-ending-frame.png"
+        alt="결제성공"
+        style={{ marginBottom: "20px" }}
+      />
+      <h2 style={{ color: "#1c64f2", marginBottom: "10px" }}>
+        결제를 완료했어요
+      </h2>
+      <p style={{ fontSize: "16px", marginBottom: "30px", color: "#555" }}>
+        도서 결제가 정상적으로 처리되었습니다.
+      </p>
 
       <div
-        className="box_section"
-        style={{ width: "600px", textAlign: "left", marginTop: "30px" }}
+        style={{
+          backgroundColor: "#fff",
+          borderRadius: "12px",
+          padding: "20px",
+          textAlign: "left",
+          fontSize: "15px",
+          color: "#333",
+          marginBottom: "20px",
+        }}
       >
-        <b>저장된 주문 정보</b>
-        <div style={{ whiteSpace: "initial" }}>
-          {responseData && <pre>{JSON.stringify(responseData, null, 4)}</pre>}
-        </div>
+        <p>
+          <strong>💳 결제 금액:</strong>{" "}
+          {Number(searchParams.get("amount")).toLocaleString()}원
+        </p>
+        <p>
+          <strong>🧾 주문 번호:</strong> {searchParams.get("orderId")}
+        </p>
       </div>
-    </>
+
+      <Link to="/mypage">
+        <button
+          className="btn btn-primary"
+          style={{
+            padding: "10px 20px",
+            borderRadius: "8px",
+            fontSize: "16px",
+            backgroundColor: "#1c64f2",
+            color: "#fff",
+            border: "none",
+          }}
+        >
+          마이페이지로 이동
+        </button>
+      </Link>
+
+      {/* 개발용: 결제 응답 데이터 */}
+      {responseData && (
+        <div
+          style={{
+            marginTop: "40px",
+            textAlign: "left",
+            background: "#fff",
+            padding: "20px",
+            borderRadius: "12px",
+            fontSize: "14px",
+            overflowX: "auto",
+          }}
+        >
+          <strong>저장된 결제 정보</strong>
+          <pre>{JSON.stringify(responseData, null, 2)}</pre>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 {
-  "/api/users*": "/users$1",
-  "/api/cart*": "/cart$1",
-  "/api/orders*": "/orders$1",
-  "/api/books*": "/books%1"
+  "/api/users*": "/600/users$1",
+  "/api/cart*": "/660/cart$1",
+  "/api/orders*": "/660/orders$1",
+  "/api/books*": "/books$1",
+  "/api/payments*": "/660/payments$1"
 }

@@ -14,6 +14,9 @@ const server = jsonServer.create();
 
 // 2. db.json 파일을 연결해서 router를 만든다 (절대 경로 사용!)
 const router = jsonServer.router(join(__dirname, "db.json"));
+router.render = (req, res) => {
+  res.jsonp(res.locals.data);
+};
 
 // 3. 기본 미들웨어를 적용한다 (logger, static 파일 서빙, no-cache 등)
 const middlewares = jsonServer.defaults();
@@ -36,10 +39,22 @@ server.use(rewriter);
 // 9. auth 미들웨어를 적용한다 (회원가입/로그인 인증 처리)
 server.use(auth);
 
-// 10. API 라우터를 적용한다 (실제 db.json 기반 CRUD 처리)
+// 10. 저장 트리거 (비동기 write)
+server.use((req, res, next) => {
+  res.on("finish", async () => {
+    try {
+      await server.db.write();
+    } catch (err) {
+      console.error("❌ DB 저장 실패:", err);
+    }
+  });
+  next();
+});
+
+// 11. API 라우터를 적용한다 (실제 db.json 기반 CRUD 처리)
 server.use(router);
 
-// 11. 서버를 지정한 포트로 실행한다 (기본 3001번)
+// 12. 서버를 지정한 포트로 실행한다 (기본 3001번)
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`🚀 JSON Server is running on http://localhost:${PORT}`);

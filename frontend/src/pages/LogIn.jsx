@@ -25,7 +25,7 @@ function Login() {
       localStorage.setItem("user", JSON.stringify(user));
 
       // ✅ 먼저 메인 페이지로 이동
-      navigate("/Home");
+      navigate("/home");
 
       // ✅ 짧은 지연 후 새로고침 → Navbar 로그인 상태 반영
       setTimeout(() => {

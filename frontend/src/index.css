@@ -66,3 +66,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.topNoticeBorder {
+  width: 100%;
+  border-top: solid 1px #000000;
+  border-bottom: solid 1px #000000;
+  margin: 0 0 20px 0;
+  box-sizing: border-box;
+  text-align: center;
+}

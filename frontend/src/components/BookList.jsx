@@ -1,33 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TossPaymentButton from "./TossPaymentButton";
 import { generateOrderId } from "../utils/generateOrderId";
 import { addCartItemToServer } from "../api/cartApi";
+import { handleAddToCart } from "../utils/cartHandler";
+import { addCartItemToGuest } from "../utils/cartStorage";
 
 function BookList({ books }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+
   // 장바구니 핸들러 함수
   const handleAddToCart = (book) => {
+    if (!user || !token) {
+      alert("로그인이 필요한 기능입니다.");
+      navigate("/login");
+      return;
+    }
+
     const cartItem = {
       isbn: book.isbn,
       title: book.title,
-      price: book.sale_price,
+      price: book.price,
       quantity: 1,
       thumbnail: book.thumbnail,
       addedAt: new Date().toISOString(),
     };
 
-    if (user && token) {
-      // 회원 → 서버에 저장
-      addCartItemToServer({ ...cartItem, userId: user.id }, token)
-        .then(() => alert("장바구니에 담았습니다."))
-        .catch(() => alert("장바구니 저장 실패"));
-    } else {
-      // 비회원 → localStorage 저장
-      addCartItemToGuest(cartItem);
-      alert("비회원 장바구니에 담았습니다.");
-    }
+    addCartItemToServer({ ...cartItem, userId: user.id }, token)
+      .then(() => alert("장바구니에 담았습니다."))
+      .catch(() => alert("장바구니 저장 실패"));
   };
 
   return (
@@ -71,13 +74,27 @@ function BookList({ books }) {
             >
               장바구니
             </button>
-            <TossPaymentButton
-              amount={book.sale_price}
-              orderId={generateOrderId(book.isbn)}
-              orderName={book.title}
-              customerName={user?.name || "비회원"}
-              className="btn btn-primary btn-sm"
-            />
+            {user ? (
+              <TossPaymentButton
+                amount={book.price}
+                orderId={generateOrderId(book.isbn)}
+                orderName={book.title}
+                customerName={user.name}
+                className="btn btn-primary btn-sm"
+                book={book}
+                quantity={1}
+              />
+            ) : (
+              <button
+                className="btn btn-primary btn-sm"
+                onClick={() => {
+                  alert("로그인이 필요합니다.");
+                  window.location.href = "/login"; // 또는 navigate("/login")
+                }}
+              >
+                로그인 후 결제
+              </button>
+            )}
           </div>
         </div>
       ))}

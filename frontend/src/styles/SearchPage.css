@@ -1,38 +1,18 @@
 /* 전체 페이지 스타일 */
 .search-page {
-  padding: 20px;
-  background-color: #f4f4f4; /* 배경색 */
+  padding: 20px 20px 20px 20px;
   font-family: Arial, sans-serif;
-  max-width: 100%;
-  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 4fr; /* 검색 바와 콘텐츠 영역을 나눔 */
-  grid-template-rows: 160px auto 50px; /* 헤더와 콘텐츠 영역을 나눔 */
-  grid-template-areas:
-    "header header"
-    "side results"
-    "footer footer";
   gap: 20px;
-}
-
-/* 검색 바 (헤더) */
-.search-header {
-  margin-bottom: 20px;
-  grid-area: header;
-  justify-content: center; /* 가운데 정렬 */
-  align-items: center;
-  padding: 10px 0;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 검색 결과와 장르 선택을 나누는 영역 */
-.search-content {
-  grid-area: side;
+/* .search-content {
   gap: 20px;
   flex-grow: 1;
-}
+} */
 
 /* 왼쪽: 장르 선택 */
 .search-sidebar {
@@ -40,6 +20,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 .search-sidebar .filter-title {
@@ -150,7 +131,6 @@
 
 /* 오른쪽: 검색 결과 */
 .search-results {
-  grid-area: results;
   flex-grow: 1;
   background-color: #fff;
   padding: 20px;
@@ -211,41 +191,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* 페이지네이션 */
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
-}
-
-.pagination-item {
-  margin: 0 5px;
-}
-
-.pagination-item.active .pagination-link {
-  background-color: #5b4ffe;
-  color: white;
-}
-
-.pagination-link {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pagination-link:hover {
-  background-color: #f0f0f0;
 }
 
 /* 검색 결과 없음 상태 */

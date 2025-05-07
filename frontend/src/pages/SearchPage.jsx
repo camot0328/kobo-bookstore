@@ -1,13 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { searchBooks } from "../api/searchBooks.js";
-import SearchBar from "../components/SearchBar.jsx";
-// import BookList from "../components/BookList.jsx";
-import BookListCopy from "../components/BookList copy.jsx";
+// import BookListCopy from "../components/BookList copy.jsx";
+import BookList from "../components/BookList.jsx";
+import Pagination from "../components/Pagination.jsx";
 import "../styles/SearchPage.css";
 
 function SearchPage() {
-  const [query, setQuery] = useState(""); // 검색바 입력값
   const [searchedQuery, setSearchedQuery] = useState(""); // 실제 검색에 사용되는 값
   const [filterFields, setFilterFields] = useState([]); // 기본값: "상품명"
   const [priceRange, setPriceRange] = useState("");
@@ -28,21 +27,8 @@ function SearchPage() {
   useEffect(() => {
     if (location.state && location.state.query) {
       setSearchedQuery(location.state.query); // 초기 검색어 설정
-      setQuery(location.state.query); // 검색창에도 동일한 값 설정
     }
   }, [location.state]);
-
-  // 검색 실행 (버튼 클릭 시 호출)
-  const handleSearch = async () => {
-    try {
-      const result = await searchBooks(query); // 검색바 입력값으로 API 호출
-      setBooks(result); // 검색 결과 저장
-      setSearchedQuery(query); // 검색어 업데이트
-      setCurrentPage(1); // 페이지 초기화
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   // 필터 핸들러
   const handleFieldChange = (e) => {
@@ -132,19 +118,6 @@ function SearchPage() {
 
   return (
     <div className="search-page">
-      <div className="search-header">
-        <h1 className="my-4">도서 검색 결과</h1>
-
-        {/* 검색 바 */}
-        <div className="search-header">
-          <SearchBar
-            query={query}
-            setQuery={setQuery}
-            handleSearch={handleSearch} // 버튼 클릭 시 검색 실행
-          />
-        </div>
-      </div>
-
       {/* 검색결과 영역 */}
       <div className="search-content">
         {/* 왼쪽: 필터 영역 */}
@@ -225,33 +198,14 @@ function SearchPage() {
           {`"${searchedQuery}"에 대한 검색 결과입니다.`}
         </h5>
 
-        <BookListCopy books={currentBooks} />
+        <BookList books={currentBooks} />
 
         {/* 페이지네이션 */}
-        <div className="pagination-container">
-          <nav>
-            <ul className="pagination">
-              {Array.from(
-                { length: Math.ceil(filteredBooks.length / itemsPerPage) },
-                (_, index) => (
-                  <li
-                    key={index}
-                    className={`pagination-item ${
-                      currentPage === index + 1 ? "active" : ""
-                    }`}
-                  >
-                    <button
-                      className="pagination-link"
-                      onClick={() => setCurrentPage(index + 1)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                )
-              )}
-            </ul>
-          </nav>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={Math.ceil(filteredBooks.length / itemsPerPage)}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );

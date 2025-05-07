@@ -1,13 +1,41 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import kakao from "../api/kakao";
 import "../styles/BookInfo.css";
+import TossPaymentButton from "../components/TossPaymentButton";
+import { generateOrderId } from "../utils/generateOrderId";
+import { addCartItemToServer } from "../api/cartApi";
+import { addCartItemToGuest } from "../utils/cartStorage";
 
 function BookInfo() {
   const { isbn } = useParams();
   const [book, setBook] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const userId = "user123";
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+
+  // 장바구니 핸들러 함수
+  const handleAddToCart = (book) => {
+    if (!user || !token) {
+      alert("로그인이 필요한 기능입니다.");
+      navigate("/login");
+      return;
+    }
+
+    const cartItem = {
+      isbn: book.isbn,
+      title: book.title,
+      price: book.price,
+      quantity,
+      thumbnail: book.thumbnail,
+      addedAt: new Date().toISOString(),
+    };
+
+    addCartItemToServer({ ...cartItem, userId: user.id }, token)
+      .then(() => alert("장바구니에 담았습니다."))
+      .catch(() => alert("장바구니 저장 실패"));
+  };
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -18,7 +46,6 @@ function BookInfo() {
         });
         if (res.data.documents.length > 0) {
           const bookData = res.data.documents[0];
-          bookData.price = bookData.price;
           setBook(bookData);
         }
       } catch (err) {
@@ -31,7 +58,7 @@ function BookInfo() {
   useEffect(() => {
     if (!book) return;
     const viewed = JSON.parse(localStorage.getItem("recentBooks")) || {};
-    const list = viewed[userId] || [];
+    const list = viewed[user] || [];
     if (!list.find((b) => b.isbn === book.isbn)) {
       const updated = [
         ...list,
@@ -41,7 +68,7 @@ function BookInfo() {
           thumbnail: book.thumbnail,
         },
       ].slice(-5);
-      viewed[userId] = updated;
+      viewed[user] = updated;
       localStorage.setItem("recentBooks", JSON.stringify(viewed));
     }
   }, [book]);
@@ -52,7 +79,7 @@ function BookInfo() {
     );
 
   const recentBooks =
-    JSON.parse(localStorage.getItem("recentBooks") || "{}")[userId] || [];
+    JSON.parse(localStorage.getItem("recentBooks") || "{}")[user] || [];
 
   return (
     <div className="bookinfo-container">
@@ -106,8 +133,33 @@ function BookInfo() {
           </p>
         </div>
         <div className="bookInfo-buttons">
-          <button className="bookInfo-btn-outline-primary">장바구니</button>
-          <button className="bookInfo-btn-primary">바로구매</button>
+          <button
+            className="bookInfo-btn-outline-primary"
+            onClick={() => handleAddToCart(book)}
+          >
+            장바구니
+          </button>
+          {user ? (
+            <TossPaymentButton
+              book={book}
+              quantity={quantity}
+              amount={book.price * quantity}
+              orderId={generateOrderId(book.isbn)}
+              orderName={book.title}
+              customerName={user.name}
+              className="btn btn-primary btn-sm"
+            />
+          ) : (
+            <button
+              onClick={() => {
+                alert("로그인이 필요합니다.");
+                window.location.href = "/login"; // 또는 navigate("/login")
+              }}
+              className="btn btn-primary btn-sm"
+            >
+              로그인 후 결제
+            </button>
+          )}
         </div>
       </div>
 

@@ -81,14 +81,13 @@
 }
 
 .navbar__auth-button {
-  white-space: nowrap;
   background-color: #fff;
   color: #55b103;
   padding: 8px 14px;
   border-radius: 6px;
   border: 2px solid #55b103;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -135,7 +134,7 @@
 /* 카테고리 메뉴 */
 .navbar__category {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 10px 50px;
   background-color: #ffffff;
   border-top: 1px solid #ddd;

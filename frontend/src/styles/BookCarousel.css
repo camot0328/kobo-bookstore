@@ -11,6 +11,13 @@
   overflow: hidden;
 }
 
+.bookCarouselWrapper {
+  max-width: 1260px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
 .bookCarouselWrapper .carouselTitle {
   font-size: 2em;
   font-weight: bold;
@@ -54,28 +61,23 @@
   width: 50px;
   margin-top: 100px;
 
-    display: flex; /* 추가 */
+  display: flex; /* 추가 */
   justify-content: center; /* 가로 가운데 */
   align-items: center; /* 세로 가운데 */
-  }
-  
-  .nextIcon img {
-    width: 30px;
-    height:20px;
-    opacity: 1; /* 기본: 진하게 */
-  }
-  .nextIcon:disabled img {
-    opacity: 0.4;  /* 비활성화 시 이미지만 40% */
-  }
-  
-  .bookCarouselWrapper {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .carouselTitle {
-    font-size: 2rem;
-    width: 1200px;      /* bookListWrapper와 동일한 width */
-    margin: 50px 0px 0px 260px;
-    text-align: left;
-  }
+}
+
+.nextIcon img {
+  width: 30px;
+  height: 20px;
+  opacity: 1; /* 기본: 진하게 */
+}
+.nextIcon:disabled img {
+  opacity: 0.4; /* 비활성화 시 이미지만 40% */
+}
+
+.carouselTitle {
+  font-size: 2rem;
+  width: 100%;
+  margin: 50px 0 0 0;
+  text-align: center;
+}

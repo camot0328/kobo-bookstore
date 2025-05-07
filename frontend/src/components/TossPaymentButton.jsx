@@ -22,25 +22,28 @@ function TossPaymentButton({
         import.meta.env.VITE_TOSS_CLIENT_KEY
       );
 
-      // ✅ 주문 정보 localStorage 저장
+      // 주문 정보 구성
       let orderItems = [];
 
       if (items && items.length > 0) {
         console.log("🛒 장바구니 결제 - items:", items);
+        // 장바구니 아이템 구조 확인 및 필요한 데이터만 추출
         orderItems = items.map((item) => ({
+          id: item.id, // 필요시 id 추가
           isbn: item.isbn,
           title: item.title,
           price: item.price,
           quantity: item.quantity || 1,
-          thumbnail: item.thumbnail,
+          thumbnail: item.thumbnail || "",
         }));
       } else if (book && quantity) {
+        // 단일 상품 로직 (변경 없음)
         const singleItem = {
           isbn: book.isbn,
           title: book.title,
           price: book.price,
           quantity,
-          thumbnail: book.thumbnail,
+          thumbnail: book.thumbnail || "",
         };
         console.log("📗 단일 결제 - item:", singleItem);
         orderItems = [singleItem];
@@ -49,11 +52,20 @@ function TossPaymentButton({
         return;
       }
 
-      // ✅ localStorage 저장 후 flush 보장
-      await new Promise((resolve) => {
-        localStorage.setItem("order_items", JSON.stringify(orderItems));
-        setTimeout(resolve, 100); // flush 보장
-      });
+      // localStorage에 데이터 저장 및 확인
+      localStorage.setItem("order_items", JSON.stringify(orderItems));
+      console.log("💾 localStorage에 저장된 order_items:", orderItems);
+
+      // 더 긴 시간 대기
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      // 결제창 호출 전 데이터 확인
+      const savedItems = JSON.parse(
+        localStorage.getItem("order_items") || "[]"
+      );
+      if (!savedItems.length) {
+        throw new Error("주문 데이터가 저장되지 않았습니다");
+      }
 
       // ✅ 결제창 호출
       const payment = tossPayments.payment({

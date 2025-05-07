@@ -42,7 +42,15 @@ export function SuccessPage() {
     let savedItems = [];
     try {
       const raw = localStorage.getItem("order_items");
-      savedItems = JSON.parse(raw || "[]");
+      console.log("📦 SuccessPage에서 읽은 raw order_items:", raw);
+
+      if (!raw) {
+        throw new Error("order_items가 없습니다");
+      }
+
+      savedItems = JSON.parse(raw);
+      console.log("📦 파싱된 order_items:", savedItems);
+
       if (!Array.isArray(savedItems) || savedItems.length === 0) {
         throw new Error("order_items가 배열이 아니거나 비어 있음");
       }
@@ -53,28 +61,41 @@ export function SuccessPage() {
       return;
     }
 
+    // 주문 데이터 구성 시 각 필드 확인
     const orderData = {
       orderId,
       userId: user.id,
-      items: savedItems,
+      items: savedItems.map((item) => ({
+        isbn: item.isbn || "",
+        title: item.title || "제목 없음",
+        price: Number(item.price) || 0,
+        quantity: Number(item.quantity) || 1,
+        thumbnail: item.thumbnail || "",
+      })),
       amount: paymentData.amount,
       createdAt: new Date().toISOString(),
       status: "결제완료",
     };
 
-    console.log("✅ 저장 시작: ", { paymentData, orderData });
+    console.log("✅ 저장할 주문 데이터:", orderData);
 
     savePayment(paymentData)
       .then((res) => {
+        console.log("💰 결제 정보 저장 성공:", res.data);
         setResponseData(res.data);
         return saveOrder(orderData);
       })
-      .then(() => {
+      .then((orderRes) => {
+        console.log("📦 주문 정보 저장 성공:", orderRes);
         localStorage.setItem(`order_saved_${orderId}`, "true");
-        localStorage.removeItem("order_items");
+
+        // 장바구니 비우기 전에 확인
+        console.log("🧹 장바구니 비우기 시작 - userId:", user.id);
         return clearCartByUserId(user.id);
       })
-      .then(() => {
+      .then((clearRes) => {
+        console.log("🧹 장바구니 비우기 성공:", clearRes);
+        localStorage.removeItem("order_items");
         alert("결제가 완료되었습니다.");
         navigate("/mypage");
       })

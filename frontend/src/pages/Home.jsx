@@ -1,9 +1,10 @@
 import BookCarousel from "../components/BookCarousel.jsx";
 import MainGrid from "../components/maingrid/MainGrid.jsx";
+import "../styles/Home.css";
 
 function Home() {
   return (
-    <div>
+    <div className="homeWrapper">
       <MainGrid />
       <BookCarousel title="봄을 맞이하며, 시집 추천해요" category="시" />
       <BookCarousel title="한강 작가 특별전" category="한강작가" />

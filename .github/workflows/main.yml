@@ -34,6 +34,8 @@ jobs:
             echo "VITE_API_BASE_URL=http://${{ secrets.REMOTE_IP }}:3001" > .env
             echo "VITE_KAKAO_KEY=${{ secrets.KAKAO_KEY }}" >> .env
             echo "VITE_OPENAI_KEY=${{ secrets.OPENAI_KEY }}" >> .env
+            echo "VITE_TOSS_CLIENT_KEY=${{ secrets.TOSS_CLIENT_KEY }}" >> .env
+
             pm2 restart backend || pm2 start server.js --name backend
 
             # 5. 프론트엔드 빌드 및 실행

@@ -8,12 +8,14 @@ import { fileURLToPath } from "url";
 // 현재 파일(server.js) 위치 가져오기
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const jsonServer = require("json-server");
+const auth = require("json-server-auth");
 
 // 1. 서버 인스턴스를 생성한다
 const server = jsonServer.create();
 
 // 2. db.json 파일을 연결해서 router를 만든다 (절대 경로 사용!)
-const router = jsonServer.router(join(__dirname, "db.json"));
+const router = jsonServer.router(path.join(__dirname, "db.json"));
 router.render = (req, res) => {
   res.jsonp(res.locals.data);
 };

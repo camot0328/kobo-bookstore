@@ -36,7 +36,7 @@ function Register() {
     if (!address.trim()) return alert("주소를 입력하세요.");
 
     try {
-      await axios.post("http://localhost:3001/register", {
+      await axios.post("http://3.35.11.171:3001/register", {
         email,
         password,
         name,

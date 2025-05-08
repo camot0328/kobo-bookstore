@@ -18,7 +18,7 @@ function Mypage() {
 
     if (token && storedUser?.id) {
       axios
-        .get(`http://localhost:3001/600/users/${storedUser.id}`, {
+        .get(`http://3.35.11.171:3001/600/users/${storedUser.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setUser(res.data))

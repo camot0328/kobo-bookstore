@@ -1,0 +1,96 @@
+.footer-kobo {
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  border-top: 1px solid #e0e0e0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 상단 공지 바 */
+.footer-notice-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-size: 13px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.footer-notice-bar strong {
+  color: #1a73e8;
+  margin-right: 8px;
+}
+
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+  align-items: flex-start;
+}
+
+/* 로고 */
+.footer-logo-section {
+  flex: 1;
+}
+.footer-logo {
+  width: 120px;
+}
+
+/* 링크 목록 */
+.footer-link-list {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-link-list li a {
+  color: #666;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.footer-link-list li a:hover {
+  color: #1a73e8;
+}
+
+/* 오른쪽 */
+.footer-right-section {
+  flex: 1;
+  text-align: right;
+}
+
+.footer-family-select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.footer-social-icons a {
+  margin-left: 8px;
+  color: #666;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.footer-social-icons a:hover {
+  color: #1a73e8;
+}
+
+/* 하단 정보 */
+.footer-bottom-info {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.6;
+  padding-bottom: 30px;
+}

@@ -58,6 +58,6 @@ server.use((req, res, next) => {
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(
-    `🚀 JSON Server is running on http://http://3.35.11.171/:${PORT}`
+    `🚀 JSON Server is running on http://3.35.11.171/:${PORT}`
   );
 });

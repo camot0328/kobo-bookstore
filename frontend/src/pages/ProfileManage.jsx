@@ -22,7 +22,7 @@ function ProfileManage() {
     if (token && storedUser?.id) {
       // 🔹 서버에서 본인 정보 조회
       axios
-        .get(`http://localhost:3001/600/users/${storedUser.id}`, {
+        .get(`http://3.35.11.171:3001/600/users/${storedUser.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -52,7 +52,7 @@ function ProfileManage() {
       const storedUser = JSON.parse(localStorage.getItem("user"));
 
       await axios.patch(
-        `http://localhost:3001/600/users/${storedUser.id}`,
+        `http://3.35.11.171:3001/600/users/${storedUser.id}`,
         { email, name, phone, birth, address },
         {
           headers: {
@@ -81,7 +81,7 @@ function ProfileManage() {
       const token = localStorage.getItem("accessToken");
       const storedUser = JSON.parse(localStorage.getItem("user"));
 
-      await axios.delete(`http://localhost:3001/600/users/${storedUser.id}`, {
+      await axios.delete(`http://3.35.11.171:3001/600/users/${storedUser.id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

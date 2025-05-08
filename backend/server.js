@@ -39,6 +39,9 @@ server.use(rewriter);
 // 9. auth 미들웨어를 적용한다 (회원가입/로그인 인증 처리)
 server.use(auth);
 
+// 11. API 라우터를 적용한다 (실제 db.json 기반 CRUD 처리)
+server.use(router);
+
 // 10. 저장 트리거 (비동기 write)
 server.use((req, res, next) => {
   res.on("finish", async () => {
@@ -50,9 +53,6 @@ server.use((req, res, next) => {
   });
   next();
 });
-
-// 11. API 라우터를 적용한다 (실제 db.json 기반 CRUD 처리)
-server.use(router);
 
 // 12. 서버를 지정한 포트로 실행한다 (기본 3001번)
 const PORT = process.env.PORT || 3001;

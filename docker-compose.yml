@@ -11,10 +11,6 @@ services:
       - backend
 
   backend:
-    image: node:18
-    working_dir: /app
-    volumes:
-      - ./backend:/app
-    command: npx json-server-auth server.json --watch --port 3001
+    build: ./backend
     ports:
       - "3001:3001"

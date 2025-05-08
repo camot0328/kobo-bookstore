@@ -39,6 +39,7 @@ server.use(middlewares);
 server.use(rewriter);
 
 // 9. auth 미들웨어를 적용한다 (회원가입/로그인 인증 처리)
+server.use(jsonServer.bodyParser);
 server.use(auth);
 
 // 11. API 라우터를 적용한다 (실제 db.json 기반 CRUD 처리)

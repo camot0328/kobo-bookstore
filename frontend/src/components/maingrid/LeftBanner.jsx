@@ -1,76 +1,82 @@
 import React, { useState, useEffect } from "react";
+import "../css/LeftBanner.css";
 
 function LeftBanner() {
   const slides = [
     {
-      title: "축하만 해도",
-      subtitle: "시드니 왕복 항공권!",
-      color: "yellow",
-      textColor: "black",
+      image: "/main_img_00.jpg",
+      link: "https://event.kyobobook.co.kr/detail/234236",
+    },
+    { image: "/main_img_01.png", link: "" },
+    {
+      image: "/main_img_02.jpg",
+      link: "https://event.kyobobook.co.kr/detail/233178",
     },
     {
-      title: "이벤트",
-      subtitle: "최대 50% 할인!",
-      color: "#3f51b5",
-      textColor: "white",
+      image: "/main_img_03.jpg",
+      link: "https://event.kyobobook.co.kr/detail/233177",
     },
-    {
-      title: "신간 안내",
-      subtitle: "베스트셀러 업데이트",
-      color: "#009688",
-      textColor: "white",
-    },
+    { image: "/main_img_04.png", link: "" },
+    { image: "/main_img_05.png", link: "" },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true); // ⭐ 추가: 자동 슬라이드 켜짐 여부
 
-  // ⭐ 자동 슬라이드 효과 (5초마다 다음 슬라이드로)
   useEffect(() => {
-    if (!isPlaying) return; // 일시정지일 때는 실행 안 함
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, [isPlaying, slides.length]);
+  }, [slides.length]);
 
-  // 수동 이전 버튼
   const handlePrev = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  // 수동 다음 버튼
   const handleNext = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
-  // ⭐ play/pause 토글
-  const togglePlay = () => {
-    setIsPlaying((prev) => !prev);
-  };
-
   return (
-    <div
-      className="leftBanner"
-      style={{ backgroundColor: slides[currentSlide].color }}
-    >
-      <h3
-        className="slidesTitle"
-        style={{ color: slides[currentSlide].textColor }}
-      >
-        {slides[currentSlide].title}
-        <br />
-        {slides[currentSlide].subtitle}
-      </h3>
-      <div className="slideButtons">
-        {/* ▶/❚❚ 버튼 */}
-        <button className="playPauseButton" onClick={togglePlay}>
-          {isPlaying ? "❚❚" : "▶"}
-        </button>
+    <div className="leftBanner">
+      {/* 이미지 */}
+      {slides[currentSlide].link ? (
+        <a
+          href={slides[currentSlide].link}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={slides[currentSlide].image}
+            alt={`slide-${currentSlide}`}
+            className="slideImage"
+          />
+        </a>
+      ) : (
+        <img
+          src={slides[currentSlide].image}
+          alt={`slide-${currentSlide}`}
+          className="slideImage"
+        />
+      )}
 
-        <button onClick={handlePrev}>◀</button>
-        <button onClick={handleNext}>▶</button>
-        <p style={{ color: slides[currentSlide].textColor }}>전체보기</p>
+      {/* 좌우 화살표 */}
+      <button className="arrowButton left" onClick={handlePrev}>
+        ❮
+      </button>
+      <button className="arrowButton right" onClick={handleNext}>
+        ❯
+      </button>
+
+      {/* 인디케이터 */}
+      <div className="indicatorDots">
+        {slides.map((_, index) => (
+          <span
+            key={index}
+            className={`dot ${index === currentSlide ? "active" : ""}`}
+            onClick={() => setCurrentSlide(index)}
+          ></span>
+        ))}
       </div>
     </div>
   );

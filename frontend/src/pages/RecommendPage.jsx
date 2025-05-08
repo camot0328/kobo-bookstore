@@ -41,6 +41,10 @@ function RecommendPage() {
     setLoading(false);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleRecommend();
+  };
+
   return (
     <div className="recommend-page">
       <h2 className="recommend-page__title">AI 도서 추천</h2>
@@ -55,6 +59,7 @@ function RecommendPage() {
           placeholder="예: 요즘 불안하고 지쳐요. 마음이 편해지는 책이 필요해요."
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <button className="recommend-page__button" onClick={handleRecommend}>
           추천받기

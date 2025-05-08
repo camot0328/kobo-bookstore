@@ -1,4 +1,4 @@
-name: main branch auto ci deploy
+name: main branch auto deploy with pm2
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy to EC2 with SSH
+      - name: Connect to EC2 and deploy
         uses: appleboy/ssh-action@v0.1.9
         with:
           host: ${{ secrets.REMOTE_IP }}
@@ -17,15 +17,31 @@ jobs:
           key: ${{ secrets.REMOTE_PRIVATE_KEY }}
           port: ${{ secrets.REMOTE_SSH_PORT }}
           script: |
+            # 1. nvm 환경 세팅 (만약 EC2에 설치되어 있다면)
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 16 || nvm install 16
+
+            # 2. 프로젝트 디렉토리로 이동
             cd /home/ubuntu/kobo-bookstore
+
+            # 3. 최신 코드 가져오기
             git pull
 
+            # 4. 백엔드 설정 및 실행
             cd backend
             npm install
+            echo "VITE_API_BASE_URL=http://${{ secrets.REMOTE_IP }}:3001" > .env
+            echo "VITE_KAKAO_KEY=${{ secrets.KAKAO_KEY }}" >> .env
+            echo "VITE_OPENAI_KEY=${{ secrets.OPENAI_KEY }}" >> .env
             pm2 restart backend || pm2 start server.js --name backend
 
+            # 5. 프론트엔드 빌드 및 실행
             cd ../frontend
             npm install
             npm run build
             pm2 delete frontend || true
             pm2 serve dist 3000 --name frontend --spa
+
+            # 6. PM2 프로세스 저장
+            pm2 save

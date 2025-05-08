@@ -57,7 +57,7 @@ function Mypage() {
         {user && (
           <>
             <img
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQk9WCjTxzcVL-mbLwSygQVqUoEJnrhzHvtNZLf4SWBapq9Oslb7vPGWbl3-WJFFCkRQnuvsbNVkO8OQOEneywX_A"
+              src="/bokyoungp.png"
               alt="프로필 사진"
               style={{
                 width: "100px",

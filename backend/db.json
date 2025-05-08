@@ -1,12 +1,12 @@
 {
   "users": [
     {
-      "email": "aaa@naver.com",
+      "email": "bokyoungp@gmail.com",
       "password": "$2a$10$dZXHdvUYzJY9kQdxyMJgvezAQwJhXriZ5icr.nCA81qKJeWqxZJpS",
-      "name": "홍길동",
-      "phone": "01011111111",
-      "birth": "1999-01-01",
-      "address": "서울",
+      "name": "박보경",
+      "phone": "01090477662",
+      "birth": "1991-09-08",
+      "address": "대전광역시",
       "id": 1
     },
     {
@@ -17,15 +17,6 @@
       "birth": "2025-05-02",
       "address": "여기",
       "id": 2
-    },
-    {
-      "email": "kosta123@naver.com",
-      "password": "$2a$10$Z8dMmTuRhH4mTictJu8iEO8U7.bgoYYywtGZiVd5f8o8PxtC.kP2m",
-      "name": "코쟁이",
-      "phone": "01011112222",
-      "birth": "1111-11-11",
-      "address": "알빠인가요 개인정보 입니다 ",
-      "id": 3
     }
   ],
   "cart": [],
@@ -46,6 +37,23 @@
       "createdAt": "2025-05-07T12:11:11.147Z",
       "status": "결제완료",
       "id": 1
+    },
+    {
+      "orderId": "order-11416015919791141601591-5ce3313e-d105-49aa-ad56-1504182ea5",
+      "userId": 1,
+      "items": [
+        {
+          "isbn": "1141601591 9791141601591",
+          "title": "한강 스페셜 에디션",
+          "price": 46800,
+          "quantity": 1,
+          "thumbnail": "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F6789372%3Ftimestamp%3D20250101145906"
+        }
+      ],
+      "amount": 46800,
+      "createdAt": "2025-05-08T01:56:49.181Z",
+      "status": "결제완료",
+      "id": 2
     }
   ],
   "payments": [
@@ -61,6 +69,19 @@
       "customerEmail": "aaa@naver.com",
       "customerId": 1,
       "id": 1
+    },
+    {
+      "paymentKey": "tviva20250508105633lWdD7",
+      "orderId": "order-11416015919791141601591-5ce3313e-d105-49aa-ad56-1504182ea5",
+      "orderName": "도서 결제",
+      "amount": 46800,
+      "currency": "KRW",
+      "method": "카드",
+      "status": "DONE",
+      "approvedAt": "2025-05-08T01:56:49.181Z",
+      "customerEmail": "aaa@naver.com",
+      "customerId": 1,
+      "id": 2
     }
   ],
   "books": [

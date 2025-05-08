@@ -1,0 +1,20 @@
+version: "3"
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+  backend:
+    image: node:18
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command: npx json-server-auth server.json --watch --port 3001
+    ports:
+      - "3001:3001"

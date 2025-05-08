@@ -1,7 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { searchBooks } from "../api/searchBooks.js";
-// import BookListCopy from "../components/BookList copy.jsx";
 import BookList from "../components/BookList.jsx";
 import Pagination from "../components/Pagination.jsx";
 import "../styles/SearchPage.css";

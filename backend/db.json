@@ -29,8 +29,40 @@
     }
   ],
   "cart": [],
-  "orders": [],
-  "payments": [],
+  "orders": [
+    {
+      "orderId": "order-11968120049791196812003-ba1d0ff4-d3c2-42cf-9421-9040d69103",
+      "userId": 1,
+      "items": [
+        {
+          "isbn": "1196812004 9791196812003",
+          "title": "퇴사, 월급이라는 마약을 끊었다",
+          "price": 16000,
+          "quantity": 1,
+          "thumbnail": "https://search1.kakaocdn.net/thumb/R120x174.q85/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flbook%2Fimage%2F5133650%3Ftimestamp%3D20220604113715"
+        }
+      ],
+      "amount": 16000,
+      "createdAt": "2025-05-07T12:11:11.147Z",
+      "status": "결제완료",
+      "id": 1
+    }
+  ],
+  "payments": [
+    {
+      "paymentKey": "tviva20250507211047mWDm2",
+      "orderId": "order-11968120049791196812003-ba1d0ff4-d3c2-42cf-9421-9040d69103",
+      "orderName": "도서 결제",
+      "amount": 16000,
+      "currency": "KRW",
+      "method": "카드",
+      "status": "DONE",
+      "approvedAt": "2025-05-07T12:11:11.147Z",
+      "customerEmail": "aaa@naver.com",
+      "customerId": 1,
+      "id": 1
+    }
+  ],
   "books": [
     {
       "authors": [

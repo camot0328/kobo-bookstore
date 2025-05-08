@@ -1,76 +1,83 @@
 .mainGrid {
-    display: grid;
-    grid-template-areas:
-      "left right"
-      "bottom bottom";
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
-    max-width: 1200px;
-    margin: 80px auto 120px auto;
-  }
-  
-  .leftBanner {
-    grid-area: left;
+  display: grid;
+  grid-template-areas:
+    "left right"
+    "bottom bottom";
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
+  max-width: 1200px;
+  margin: 80px auto 120px auto;
+}
 
+.leftBanner {
+  grid-area: left;
   /* ⭐ 배경색 슬라이드에 따라 변할거라 이건 JSX에서 컨트롤 할거임 */
   color: rgb(255, 255, 255);
-  padding: 20px;
   border-radius: 10px;
   position: relative;
   height: 300px;
-  }
-  .leftBanner .slideButtons{
-    background-color: gray;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .leftBanner .slidesTitle{
-    font-size: 24px;
+}
+.leftBanner .slideButtons {
+  background-color: gray;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.leftBanner .slidesTitle {
+  font-size: 24px;
   font-weight: bold;
   margin-top: 50px; /* 위쪽 공간을 밀어내고 아래로 내려감 */
-  align-self: end;  /* grid 안에서 아래로 */
-  }
-  
-  .rightBanner {
-    grid-area: right;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .bottomRow {
-    height: 100px;
-    grid-area: bottom;
-    display: grid;
-    grid-template-columns: 2fr 1fr;  /* 왼쪽: bottomMenu, 오른쪽: adBanner */
-    grid-gap: 20px;
-  }
-  
-  /* 아이콘 메뉴 */
-  .bottomMenu {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-  }
+  align-self: end; /* grid 안에서 아래로 */
+}
 
-  .menuItem {
-    text-align: center;
-    font-size: 14px;
-    cursor: pointer;    /* hover 전에도 pointer */
-    text-decoration: none; /* a 태그 밑줄 제거 */
-    color: inherit; /* 글자색 상속 (변하지 않음) */
-    flex-direction: column;
-  }
-  
-  .menuItem:hover {
-    cursor: pointer; /* hover 시에도 pointer 유지 */
-    color: inherit; /* hover 해도 글씨색 변하지 않음 */
-    text-decoration: none; /* 밑줄 안생김 */
-  }
+.rightBanner {
+  grid-area: right;
+  height: 300px; /* ✅ 원하는 고정 높이 (또는 aspect-ratio 사용 가능) */
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+}
+
+.rightBannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ cover: 꽉 채우되 넘치는 부분은 잘림 */
+  display: block;
+}
+
+.bottomRow {
+  height: 100px;
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 왼쪽: bottomMenu, 오른쪽: adBanner */
+  grid-gap: 20px;
+}
+
+/* 아이콘 메뉴 */
+.bottomMenu {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.menuItem {
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer; /* hover 전에도 pointer */
+  text-decoration: none; /* a 태그 밑줄 제거 */
+  color: inherit; /* 글자색 상속 (변하지 않음) */
+  flex-direction: column;
+}
+
+.menuItem:hover {
+  cursor: pointer; /* hover 시에도 pointer 유지 */
+  color: inherit; /* hover 해도 글씨색 변하지 않음 */
+  text-decoration: none; /* 밑줄 안생김 */
+}
 
 .menuText {
   font-size: 14px;
@@ -80,13 +87,17 @@
   color: inherit; /* 글자색 고정 */
 }
 
-  /* 광고 배너 */
-  .adBanner {
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-  }
-  
+/* 광고 배너 */
+.adBanner {
+  aspect-ratio: 274 / 96; /* 또는 약 2.85 */
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.adBannerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}

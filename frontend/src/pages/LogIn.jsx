@@ -14,7 +14,7 @@ function Login() {
 
     try {
       // 🔥 서버에 로그인 요청
-      const res = await axios.post("http://3.35.11.171:3001/login", {
+      const res = await axios.post("http://localhost:3001/login", {
         email,
         password,
       });

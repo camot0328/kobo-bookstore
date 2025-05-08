@@ -57,5 +57,7 @@ server.use((req, res, next) => {
 // 12. 서버를 지정한 포트로 실행한다 (기본 3001번)
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
-  console.log(`🚀 JSON Server is running on http://localhost:${PORT}`);
+  console.log(
+    `🚀 JSON Server is running on http://http://3.35.11.171/:${PORT}`
+  );
 });

@@ -21,7 +21,9 @@ function Footer() {
       <div className="footer-main">
         {/* 왼쪽: 로고 */}
         <div className="footer-logo-section">
-          <img src={koboLogo} alt="코보문고 로고" className="footer-logo" />
+          <a href="/">
+            <img src={koboLogo} alt="코보문고 로고" className="footer-logo" />
+          </a>
         </div>
 
         {/* 중앙: 링크 */}
